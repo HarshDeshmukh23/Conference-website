@@ -857,7 +857,11 @@ function loadData() {
 // ── ASSETS ───────────────────────────────────────────────
 const ASSETS = {
     logo: './assets/logo.jpeg',
+    collegeLogo: './assets/college_logo.png',
     prmitr: './assets/prmitr.webp',
+    ieeeMain: './assets/IEEE_main_logo.jpeg',
+    ieeeMaha: './assets/IEEE_maha.png',
+    ieeePrmitr: './assets/ieee_prmitr.png',
     ambadevi: './assets/ambadevi.jpg',
     chikhaldara: './assets/chikhaldara.png',
     melghat: './assets/melghat.png',
@@ -903,17 +907,26 @@ const CITY_GALLERY = [
 // CONTACTS and OPER_GROUPS are derived from loaded JSON data — see renderContact() and renderCommittee()
 
 // ── ROUTING ──────────────────────────────────────────────
-const PAGES = new Set(['committee', 'important-dates', 'author-guidelines', 'program', 'venue', 'contact']);
+const PAGES = new Set(['committee', 'important-dates', 'author-guidelines', 'program', 'venue', 'registration', 'contact']);
 
 function getRoute() {
+    if (window.location.pathname.toLowerCase().endsWith('/registration.html')) return 'registration';
     return window.location.hash.replace(/^#\/?/, '');
 }
 
 function goPage(key) {
+    if (window.location.pathname.toLowerCase().endsWith('/registration.html')) {
+        window.location.href = `./index.html#/${key}`;
+        return;
+    }
     window.location.hash = key ? `#/${key}` : '#/';
 }
 
 function goSection(sectionId) {
+    if (window.location.pathname.toLowerCase().endsWith('/registration.html')) {
+        window.location.href = `./index.html#/${sectionId}`;
+        return;
+    }
     const route = getRoute();
     if (PAGES.has(route)) {
         window.location.hash = '#/';
@@ -962,7 +975,7 @@ function renderNavbar() {
     <nav id="navbar">
       <div class="nav-inner">
         <div class="nav-brand" data-action="home-brand" role="button" tabindex="0">
-          <div class="nav-logo-wrap"><img src="${ASSETS.logo}" alt="PRMITR"/></div>
+          <div class="nav-brand-logo"><img src="${ASSETS.logo}" alt="PRMITR"/></div>
           <div>
             <span class="nav-brand-name">ICARIES 2027</span>
             <span class="nav-brand-sub">PRMITR Badnera</span>
@@ -970,6 +983,10 @@ function renderNavbar() {
         </div>
         <ul class="nav-links">
           <li><a href="/" data-nav="home"               data-goto-section="home">Home</a></li>
+          <li><a href="/" data-goto-page="committee">Committee</a></li>
+          <li><a href="/" data-goto-page="program">Call for Papers</a></li>
+          <li><a href="/" data-goto-page="important-dates">Important Dates</a></li>
+          <li><a href="./registration.html" data-nav="registration">Registration</a></li>
           <li class="nav-dropdown">
             <a href="/" data-nav="about-conference" data-goto-section="about-conference">About</a>
             <ul class="dropdown-menu">
@@ -978,12 +995,7 @@ function renderNavbar() {
               <li><a href="/" data-goto-section="about-city">About City</a></li>
             </ul>
           </li>
-          <li><a href="/" data-goto-page="committee">Committee</a></li>
-          <li><a href="/" data-goto-page="important-dates">Important Dates</a></li>
-          <li><a href="/" data-goto-page="author-guidelines">For Authors</a></li>
-          <li><a href="/" data-goto-page="program">Call for Papers</a></li>
-          <li><a href="/" data-goto-page="venue">Venue</a></li>
-          <li><a href="/" data-goto-page="contact">Contact</a></li>
+          <li><a href="/" data-goto-page="contact">Contact Us</a></li>
         </ul>
         <button class="hamburger" id="hamburger" aria-controls="mobile-nav" aria-expanded="false" aria-label="Open menu">
           <span></span><span></span><span></span>
@@ -993,6 +1005,10 @@ function renderNavbar() {
     <div id="mobile-nav">
       <ul>
         <li><a href="/" data-goto-section="home">Home</a></li>
+        <li><a href="/" data-goto-page="committee">Committee</a></li>
+        <li><a href="/" data-goto-page="program">Call for Papers</a></li>
+        <li><a href="/" data-goto-page="important-dates">Important Dates</a></li>
+        <li><a href="./registration.html" data-nav="registration">Registration</a></li>
         <li class="mobile-nav-group">
           <span class="mobile-nav-label">About</span>
           <ul class="mobile-submenu">
@@ -1001,12 +1017,7 @@ function renderNavbar() {
             <li><a href="/" data-goto-section="about-city">About City</a></li>
           </ul>
         </li>
-        <li><a href="/" data-goto-page="committee">Committee</a></li>
-        <li><a href="/" data-goto-page="important-dates">Important Dates</a></li>
-        <li><a href="/" data-goto-page="author-guidelines">For Authors</a></li>
-        <li><a href="/" data-goto-page="program">Call for Papers</a></li>
-        <li><a href="/" data-goto-page="venue">Venue</a></li>
-        <li><a href="/" data-goto-page="contact">Contact</a></li>
+        <li><a href="/" data-goto-page="contact">Contact Us</a></li>
       </ul>
     </div>`;
 }
@@ -1030,16 +1041,22 @@ function renderHome() {
 
     return `
     <!-- HERO -->
-    <section id="home" class="section home-hero" style="padding-top:3.5rem;padding-bottom:3.5rem;text-align:center">
-      <div class="hero-inner section-inner">
-        <h1 class="hero-title">
-          2027 IEEE International Conference on Automation<br>and Resilient Innovative Expert System
-          <span class="blue">ICARIES 2027</span>
-        </h1>
-        <p class="hero-sponsored">Venue: PRMITR Badnera</p>
+    <section id="home" class="section home-hero home-hero-restyled" style="padding-top:3.5rem;padding-bottom:3.5rem;text-align:center">
+      <div class="hero-inner section-inner home-hero-layout">
+        <div class="home-hero-title-row">
+          <div class="home-hero-logo home-hero-logo-college"><img src="${ASSETS.collegeLogo}" alt="PRMITR College Logo"/></div>
+          <div class="home-hero-copy">
+            <h1 class="hero-title">
+              <span class="blue">ICARIES 2027</span>
+              IEEE International Conference on Automation<br>and Resilient Innovative Expert System<br>(Hybrid Mode)
+            </h1>
+            <p class="hero-sponsored">Venue: PRMITR Badnera</p>
+            <div class="home-hero-sponsor"><img src="${ASSETS.ieeeMaha}" alt="IEEE Maharashtra Section"/></div>
+          </div>
+          <div class="home-hero-logo home-hero-logo-ieee"><img src="${ASSETS.ieeeMain}" alt="IEEE"/></div>
+        </div>
         <div class="hero-meta">
           <div class="hero-meta-item">${IC.cal} 26–27 February 2027</div>
-          <div class="hero-meta-item">${IC.loc} Hybrid Mode</div>
           <div class="hero-meta-item">IEEE Conference Record Number: #72646</div>
         </div>
       </div>
@@ -1212,6 +1229,46 @@ function renderImportantDates() {
         <div class="dtable-title">Conference Schedule</div>
         <table class="dtable"><tbody>${datesRows}</tbody></table>
         <p style="margin-top:1.25rem;color:var(--muted);font-size:.9rem">Late registration fee: ₹1,000 additional per participant.</p>
+      </div>
+    </section>`;
+}
+
+function renderRegistration() {
+    const fees = [
+        ['1', 'IEEE Member', '₹ 8,500 + 18% GST'],
+        ['2', 'Non-IEEE Member', '₹ 9,500 + 18% GST'],
+        ['3', 'Foreign Authors', '$150 + 18% GST']
+    ];
+
+    return `
+    <div class="subpage-hero">
+      <div class="subpage-hero-inner subpage-hero-inner-centered">
+        <span class="sec-eyebrow">ICARIES 2027</span>
+        <h1 class="sec-title" style="font-size:clamp(1.6rem,4vw,2.8rem)">Registration</h1>
+        <div class="sec-bar"></div>
+        <p>Registration information and applicable conference fees.</p>
+      </div>
+    </div>
+    <section class="section registration-section">
+      <div class="section-inner registration-wrap">
+        <div class="registration-notes">
+          <p><strong>Mandatory Registration:</strong> At least one author of an accepted paper must register for the conference for the paper to be included in the conference proceedings.</p>
+          <p><strong>Separate Registration for Multiple Papers:</strong> If an author has multiple accepted papers, each paper must be registered separately.</p>
+          <p>The author can present a maximum of <strong>three papers</strong>. However, each paper needs to be registered separately.</p>
+          <p><strong>Tax:</strong> The registrants must bear payment gateway charges and applicable taxes (GST 18%) or levies, if any.</p>
+          <p><strong>ID Proof:</strong> IEEE members must upload a valid IEEE membership card during the online registration.</p>
+          <p><strong>No Show Consequence:</strong> Papers accepted by the Technical Program Committee but not presented (either online or in person) will not be submitted to IEEE Xplore. All conference attendees are required to register.</p>
+          <p><strong>Non-Refundable Fees:</strong> Once the registration fees are paid, they are non-refundable under any circumstances.</p>
+        </div>
+        <div class="registration-fees">
+          <h2>Registration Fees</h2>
+          <div class="registration-table-wrap">
+            <table class="registration-table">
+              <thead><tr><th>Sr. No.</th><th>Category of Registration</th><th>Total Registration Fees</th></tr></thead>
+              <tbody>${fees.map(([number, category, fee]) => `<tr><td>${number}</td><td>${category}</td><td>${fee}</td></tr>`).join('')}</tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </section>`;
 }
@@ -1419,12 +1476,32 @@ function renderVenue() {
 
 // ── PAGE: CONTACT ─────────────────────────────────────────
 function renderContact() {
-    const cards = DATA.authors.contacts.map(c => `
+    const cards = [
+      {
+        icon: IC.loc,
+        title: 'Our Office',
+        details: [
+          'Prof. Ram Meghe Institute of Technology and Research, Badnera - Amravati 444701(MS)'
+        ]
+      },
+      {
+        icon: IC.mail,
+        title: 'Email Us',
+        details: ['aries@mitra.ac.in','auchaudhari@mitra.ac.in']
+      },
+      {
+        icon: IC.phone,
+        title: 'Call Us',
+        details: [
+          'Prof. A.U. Chaudhari :',
+          '(+91) 9021117416'
+        ]
+      }
+    ].map(c => `
     <article class="contact-card reveal">
-      <div class="contact-card-icon">${IC.user}</div>
-      <h3 class="contact-card-title">${c.name}</h3>
-      <div class="contact-card-detail"><strong>Email:</strong> ${c.email}</div>
-      <div class="contact-card-detail"><strong>Mobile:</strong> ${c.mobile}</div>
+      <div class="contact-card-icon">${c.icon}</div>
+      <h3 class="contact-card-title">${c.title}</h3>
+      ${c.details.map(detail => `<div class="contact-card-detail">${detail}</div>`).join('')}
     </article>`).join('');
 
     return `
@@ -1565,6 +1642,7 @@ function renderMain() {
 
     if (route === 'committee') main.innerHTML = renderCommittee();
     else if (route === 'important-dates') main.innerHTML = renderImportantDates();
+    else if (route === 'registration') main.innerHTML = renderRegistration();
     else if (route === 'author-guidelines') main.innerHTML = renderAuthorGuidelines();
     else if (route === 'program') main.innerHTML = renderProgram();
     else if (route === 'venue') main.innerHTML = renderVenue();
@@ -1661,6 +1739,10 @@ function init() {
     ${renderScrollTop()}`;
 
     renderMain();
+    const requestedSection = getRoute();
+    if (requestedSection && !PAGES.has(requestedSection)) {
+        setTimeout(() => scrollToSection(requestedSection), 0);
+    }
     bindNavEvents();
 
     window.addEventListener('hashchange', () => {
