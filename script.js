@@ -986,6 +986,7 @@ function renderNavbar() {
           <li><a href="/" data-goto-page="committee">Committee</a></li>
           <li><a href="/" data-goto-page="program">Call for Papers</a></li>
           <li><a href="/" data-goto-page="important-dates">Important Dates</a></li>
+          <li><a href="/" data-goto-page="author-guidelines">Author Guidelines</a></li>
           <li><a href="./registration.html" data-nav="registration">Registration</a></li>
           <li class="nav-dropdown">
             <a href="/" data-nav="about-conference" data-goto-section="about-conference">About</a>
@@ -1008,6 +1009,7 @@ function renderNavbar() {
         <li><a href="/" data-goto-page="committee">Committee</a></li>
         <li><a href="/" data-goto-page="program">Call for Papers</a></li>
         <li><a href="/" data-goto-page="important-dates">Important Dates</a></li>
+        <li><a href="/" data-goto-page="author-guidelines">Author Guidelines</a></li>
         <li><a href="./registration.html" data-nav="registration">Registration</a></li>
         <li class="mobile-nav-group">
           <span class="mobile-nav-label">About</span>
