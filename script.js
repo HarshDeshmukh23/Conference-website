@@ -1067,6 +1067,10 @@ function renderHome() {
               Submit Paper ${IC.arr}
             </a>
           </div>
+          <div class="cmt-acknowledgment" style="margin-top:1.5rem;text-align:left">
+            <h2>CMT ACKNOWLEDGMENT</h2>
+            <p>The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.</p>
+          </div>
         </div>
       </div>
     </section>
