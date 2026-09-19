@@ -871,7 +871,7 @@ const ASSETS = {
     semadoh: './assets/semadoh.jpg',
     connectivity: './assets/connectivity.png',
     landmark: './assets/landmark.avif',
-    primePark: './assets/prime-park.avif',
+    primePark: './assets/prime-park.jpg',
 };
 
 // TODO: Replace with the official CMT paper-submission URL before deployment.
@@ -1552,7 +1552,7 @@ function renderFooter() {
               <li><a href="/" data-goto-section="speakers">Keynote Speakers</a></li>
               <li><a href="/" data-goto-page="important-dates">Important Dates</a></li>
               <li><a href="/" data-goto-page="committee">Committees</a></li>
-              <li><a href="/" data-goto-section="venue">Venue &amp; Travel</a></li>
+              <li><a href="/" data-goto-page="venue">Venue &amp; Travel</a></li>
             </ul>
           </div>
           <div class="footer-col">
