@@ -42,6 +42,11 @@ a {
   color: inherit
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 a,
 button,
 .hamburger {
@@ -49,18 +54,20 @@ button,
   -webkit-appearance: none;
   -webkit-tap-highlight-color: transparent;
   -webkit-focus-ring-color: transparent;
+}
+
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+.hamburger:focus:not(:focus-visible) {
   outline: none;
   box-shadow: none;
 }
 
-a:focus,
 a:focus-visible,
-button:focus,
 button:focus-visible,
-.hamburger:focus,
 .hamburger:focus-visible {
-  outline: none;
-  box-shadow: none;
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
 }
 
 a::-moz-focus-inner,
@@ -127,10 +134,10 @@ sup {
 }
 
 .nav-brand-logo {
-  width: 40px;
+  width: 56px;
   height: 40px;
-  border-radius: 50%;
-  background: var(--blue);
+  border-radius: 6px;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,8 +148,7 @@ sup {
 .nav-brand-logo img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
+  object-fit: contain;
 }
 
 .nav-brand-name {
@@ -420,6 +426,10 @@ sup {
 }
 
 @media (min-width: 769px) and (max-width: 900px) {
+  .welcome-grid {
+    grid-template-columns: 1fr;
+  }
+
   .home-hero-title-row {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
@@ -433,7 +443,8 @@ sup {
 
   .home-hero-logo-college,
   .home-hero-logo-ieee,
-  .home-hero-sponsor {
+  .home-hero-sponsor,
+  .welcome-logo {
     display: none;
   }
 }
@@ -546,7 +557,7 @@ sup {
 }
 
 .hero-sponsored {
-  font-size: .88rem;
+  font-size: 1.15rem;
   color: var(--text-soft);
   margin: .8rem 0 1.4rem;
 }
@@ -768,15 +779,28 @@ sup {
 /* ── WELCOME ─────────────────────────────────────────── */
 .welcome-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  align-items: start;
+  grid-template-columns: 1fr 220px;
+  gap: 2.5rem;
+  align-items: center;
 }
 
-.welcome-grid>div {
+.welcome-grid > div {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+}
+
+.welcome-logo {
+  width: 100%;
+  max-width: 220px;
+  justify-self: end;
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.welcome-logo img {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  object-fit: contain;
 }
 
 .welcome-text p {
@@ -1282,6 +1306,11 @@ sup {
     margin-top: 2rem;
   }
 
+  .submission-cta {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
   .contact-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(260px, 1fr));
@@ -1329,6 +1358,10 @@ sup {
     line-height: 1.7;
     color: var(--text-mid);
     font-size: .95rem;
+  }
+
+  .contact-card-email .contact-card-detail + .contact-card-detail {
+    margin-top: -0.9rem;
   }
 
   .program-track-card {
@@ -2165,7 +2198,6 @@ sup {
       grid-template-columns: repeat(3, 1fr)
     }
 
-    .welcome-grid,
     .about-grid {
       grid-template-columns: 1fr;
       gap: 2.5rem
@@ -2195,6 +2227,10 @@ sup {
       --nav-h: 60px
     }
 
+    .welcome-grid {
+      grid-template-columns: 1fr;
+    }
+
     .home-hero-title-row {
       grid-template-columns: minmax(0, 1fr);
       gap: 0;
@@ -2219,7 +2255,8 @@ sup {
 
     .home-hero-logo-college,
     .home-hero-logo-ieee,
-    .home-hero-sponsor {
+    .home-hero-sponsor,
+    .welcome-logo {
       display: none;
     }
 
@@ -2278,7 +2315,6 @@ sup {
   }
 
   @media(max-width:520px) {
-
     .home-hero-title-row {
       grid-template-columns: 1fr;
       gap: 1rem;

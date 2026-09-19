@@ -857,6 +857,7 @@ function loadData() {
 // ── ASSETS ───────────────────────────────────────────────
 const ASSETS = {
     logo: './assets/logo.jpeg',
+    icariesLogo: './assets/icaries_logo.png',
     collegeLogo: './assets/college_logo.png',
     prmitr: './assets/prmitr.webp',
     ieeeMain: './assets/IEEE_main_logo.jpeg',
@@ -872,6 +873,9 @@ const ASSETS = {
     landmark: './assets/landmark.avif',
     primePark: './assets/prime-park.avif',
 };
+
+// TODO: Replace with the official CMT paper-submission URL before deployment.
+const SUBMISSION_LINK = 'PASTE_SUBMISSION_LINK_HERE';
 
 // ── SVG ICONS ────────────────────────────────────────────
 const IC = {
@@ -907,26 +911,22 @@ const CITY_GALLERY = [
 // CONTACTS and OPER_GROUPS are derived from loaded JSON data — see renderContact() and renderCommittee()
 
 // ── ROUTING ──────────────────────────────────────────────
+if (/\/index\.html$/i.test(window.location.pathname)) {
+    const cleanPath = window.location.pathname.replace(/index\.html$/i, '');
+    history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
+}
+
 const PAGES = new Set(['committee', 'important-dates', 'author-guidelines', 'program', 'venue', 'registration', 'contact']);
 
 function getRoute() {
-    if (window.location.pathname.toLowerCase().endsWith('/registration.html')) return 'registration';
     return window.location.hash.replace(/^#\/?/, '');
 }
 
 function goPage(key) {
-    if (window.location.pathname.toLowerCase().endsWith('/registration.html')) {
-        window.location.href = `./index.html#/${key}`;
-        return;
-    }
     window.location.hash = key ? `#/${key}` : '#/';
 }
 
 function goSection(sectionId) {
-    if (window.location.pathname.toLowerCase().endsWith('/registration.html')) {
-        window.location.href = `./index.html#/${sectionId}`;
-        return;
-    }
     const route = getRoute();
     if (PAGES.has(route)) {
         window.location.hash = '#/';
@@ -975,7 +975,7 @@ function renderNavbar() {
     <nav id="navbar">
       <div class="nav-inner">
         <div class="nav-brand" data-action="home-brand" role="button" tabindex="0">
-          <div class="nav-brand-logo"><img src="${ASSETS.logo}" alt="PRMITR"/></div>
+          <div class="nav-brand-logo"><img src="${ASSETS.icariesLogo}" alt="ICARIES 2027"/></div>
           <div>
             <span class="nav-brand-name">ICARIES 2027</span>
             <span class="nav-brand-sub">PRMITR Badnera</span>
@@ -987,7 +987,7 @@ function renderNavbar() {
           <li><a href="/" data-goto-page="program">Call for Papers</a></li>
           <li><a href="/" data-goto-page="important-dates">Important Dates</a></li>
           <li><a href="/" data-goto-page="author-guidelines">Author Guidelines</a></li>
-          <li><a href="./registration.html" data-nav="registration">Registration</a></li>
+          <li><a href="/" data-goto-page="registration" data-nav="registration">Registration</a></li>
           <li class="nav-dropdown">
             <a href="/" data-nav="about-conference" data-goto-section="about-conference">About</a>
             <ul class="dropdown-menu">
@@ -1010,7 +1010,7 @@ function renderNavbar() {
         <li><a href="/" data-goto-page="program">Call for Papers</a></li>
         <li><a href="/" data-goto-page="important-dates">Important Dates</a></li>
         <li><a href="/" data-goto-page="author-guidelines">Author Guidelines</a></li>
-        <li><a href="./registration.html" data-nav="registration">Registration</a></li>
+        <li><a href="/" data-goto-page="registration" data-nav="registration">Registration</a></li>
         <li class="mobile-nav-group">
           <span class="mobile-nav-label">About</span>
           <ul class="mobile-submenu">
@@ -1052,7 +1052,7 @@ function renderHome() {
               <span class="blue">ICARIES 2027</span>
               IEEE International Conference on Automation<br>and Resilient Innovative Expert System<br>(Hybrid Mode)
             </h1>
-            <p class="hero-sponsored">Venue: PRMITR Badnera</p>
+            <p class="hero-sponsored">Venue: Prof. Ram Meghe Institute of Technology and Research (PRMITR)<br>Badnera - Amravati 444701(MS)</p>
             <div class="home-hero-sponsor"><img src="${ASSETS.ieeeMaha}" alt="IEEE Maharashtra Section"/></div>
           </div>
           <div class="home-hero-logo home-hero-logo-ieee"><img src="${ASSETS.ieeeMain}" alt="IEEE"/></div>
@@ -1077,6 +1077,9 @@ function renderHome() {
               <p>ICARIES provides a dynamic platform for researchers, academics, industry professionals, and policymakers to exchange ideas, present their latest research findings, and explore innovative solutions in the realms of intelligent computing and sustainable technology. This interdisciplinary conference aims to foster collaboration and knowledge sharing across a range of specialized tracks.</p>
               <p>ICARIES 2027 is organized in hybrid mode, bolstering the global presence of the event. Delegates will be able to decide whether to attend physically or virtually.</p>
             </div>
+          </div>
+          <div class="welcome-logo">
+            <img src="${ASSETS.icariesLogo}" alt="ICARIES 2027"/>
           </div>
         </div>
       </div>
@@ -1342,6 +1345,11 @@ function renderProgram() {
     <section class="section">
       <div class="section-inner">
         <div class="program-tracks-grid">${tracks}</div>
+        <div class="submission-cta">
+          <a href="${SUBMISSION_LINK}" target="_blank" rel="noopener noreferrer" class="btn btn-blue">
+            Submit Your Paper ${IC.arr}
+          </a>
+        </div>
         <div class="cmt-acknowledgment">
           <h2>CMT ACKNOWLEDGMENT</h2>
           <p>The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.</p>
@@ -1495,12 +1503,11 @@ function renderContact() {
         icon: IC.phone,
         title: 'Call Us',
         details: [
-          'Prof. A.U. Chaudhari :',
-          '(+91) 9021117416'
+          'Prof. A.U. Chaudhari : (+91) 9021117416'
         ]
       }
     ].map(c => `
-    <article class="contact-card reveal">
+    <article class="contact-card reveal${c.title === 'Email Us' ? ' contact-card-email' : ''}">
       <div class="contact-card-icon">${c.icon}</div>
       <h3 class="contact-card-title">${c.title}</h3>
       ${c.details.map(detail => `<div class="contact-card-detail">${detail}</div>`).join('')}
