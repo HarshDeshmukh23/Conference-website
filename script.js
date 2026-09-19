@@ -1058,10 +1058,12 @@ function renderHome() {
           <p class="hero-subtitle">Hybrid Mode</p>
           <div class="hero-meta-item hero-record">IEEE Conference Record Number: #72646</div>
           <div class="home-hero-sponsor-line">
-            <span>Technically Sponsored by IEEE Maharashtra Section</span>
+            <span>Technically Co-Sponsored by IEEE Maharashtra Section</span>
             <img src="${ASSETS.ieeeMaha}" alt="IEEE Maharashtra Section" width="144" height="37"/>
           </div>
-          <div class="hero-meta-item hero-dates">${IC.cal} 26–27 February 2027</div>
+          <div class="hero-meta-item hero-dates">
+            <span class="hero-date-value">${IC.cal} Date of Conference : 26–27 February 2027</span>
+          </div>
           <p class="hero-sponsored hero-venue">Venue: Prof. Ram Meghe Institute of Technology and Research (PRMITR)<br>Badnera - Amravati 444701(MS)</p>
           <div class="hero-cta" style="margin-top:1.25rem">
             <a href="${SUBMISSION_LINK}" target="_blank" rel="noopener noreferrer" class="btn btn-blue">
@@ -1264,6 +1266,8 @@ function renderRegistration() {
         ['3', 'Foreign Authors', '$150 + 18% GST']
     ];
 
+    // TODO: Replace all bank-detail placeholders before deployment.
+
     return `
     <div class="subpage-hero">
       <div class="subpage-hero-inner subpage-hero-inner-centered">
@@ -1293,6 +1297,25 @@ function renderRegistration() {
             </table>
             <p style="margin-top:1.25rem;color:var(--muted);font-size:.9rem">Late registration fee: ₹1,000 additional per participant.</p>
           </div>
+        </div>
+        <div class="registration-fees registration-bank-details">
+          <h2>Banking Details for Registration</h2>
+          <p><strong>Please mention your Paper ID / Registration ID in the 'Reference/Purpose' field of the transaction.</strong></p>
+          <div class="registration-table-wrap">
+            <table class="registration-table">
+              <thead><tr><th>Field</th><th>Details</th></tr></thead>
+              <tbody>
+                <tr><td>Account Name</td><td>PASTE_ACCOUNT_NAME_HERE</td></tr>
+                <tr><td>Account Number</td><td>PASTE_ACCOUNT_NUMBER_HERE</td></tr>
+                <tr><td>IFSC Code</td><td>PASTE_IFSC_CODE_HERE</td></tr>
+                <tr><td>Name of the Bank</td><td>PASTE_BANK_NAME_AND_BRANCH_HERE</td></tr>
+                <tr><td>Type of Account</td><td>PASTE_ACCOUNT_TYPE_HERE</td></tr>
+                <tr><td>MICR No</td><td>PASTE_MICR_NUMBER_HERE</td></tr>
+                <tr><td>SWIFT Code (for foreign authors)</td><td>PASTE_SWIFT_CODE_HERE</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>After completing the transfer, please email the payment/transaction proof (in PDF format) along with your Paper ID to [PASTE_CONTACT_EMAIL_HERE].</p>
         </div>
         <div class="hero-cta" style="margin:1.5rem 0">
           <a href="${SUBMISSION_LINK}" target="_blank" rel="noopener noreferrer" class="btn btn-blue">

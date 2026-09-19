@@ -369,17 +369,21 @@ sup {
 
 .home-hero-layout {
   max-width: 1080px;
+  container-type: inline-size;
+  container-name: hero-layout;
 }
 
 .home-hero-title-row {
   display: grid;
-  grid-template-columns: 172px minmax(0, 1fr) 172px;
+  grid-template-columns: clamp(48px, 14%, 150px) minmax(0, 1fr) clamp(48px, 14%, 150px);
   align-items: center;
-  gap: 2.25rem;
+  gap: clamp(.5rem, 2vw, 2.25rem);
+  container-type: inline-size;
+  container-name: hero-title-row;
 }
 
 .home-hero-logo {
-  height: 170px;
+  height: clamp(48px, 14cqw, 150px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -410,19 +414,12 @@ sup {
     grid-template-columns: 1fr;
   }
 
-  .home-hero-title-row {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0;
-  }
-
   .home-hero-details {
     width: 100%;
     padding: 0 .5rem;
     text-align: center;
   }
 
-  .home-hero-logo-college,
-  .home-hero-logo-ieee,
   .welcome-logo {
     display: none;
   }
@@ -442,6 +439,9 @@ sup {
   justify-content: center;
   margin: .5rem 0 1.25rem;
   text-align: center;
+  font-size: clamp(.9rem, 1.8vw, 1.08rem);
+  font-weight: 600;
+  color: var(--text);
 }
 
 .home-hero-sponsor-line img {
@@ -543,7 +543,7 @@ sup {
 }
 
 .hero-title {
-  font-size: clamp(1.22rem, 3vw, 2.05rem);
+  font-size: clamp(1.25rem, 3.85cqw, 3.15rem);
   font-weight: 900;
   line-height: 1.1;
   color: var(--text);
@@ -563,7 +563,7 @@ sup {
 
 .hero-subtitle {
   display: inline-block;
-  font-size: .95rem;
+  font-size: clamp(.85rem, 1.75vw, 1.05rem);
   font-weight: 600;
   color: var(--blue-dark);
   background: var(--blue-light);
@@ -573,17 +573,73 @@ sup {
 }
 
 .hero-venue {
+  font-size: clamp(.92rem, 1.85vw, 1.1rem);
   color: var(--text);
   font-weight: 600;
+}
+
+@supports (container-type: inline-size) {
+  .hero-subtitle {
+    font-size: clamp(.85rem, 1.8cqw, 1.05rem);
+  }
+
+  .home-hero-sponsor-line {
+    font-size: clamp(.9rem, 1.85cqw, 1.08rem);
+  }
+
+  .hero-venue {
+    font-size: clamp(.92rem, 1.9cqw, 1.1rem);
+  }
+}
+
+@container hero-layout (max-width: 650px) {
+  .home-hero-title-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+}
+
+@container hero-title-row (max-width: 650px) {
+  .home-hero-logo-college,
+  .home-hero-logo-ieee {
+    display: none;
+  }
+
+  .hero-title {
+    font-size: clamp(1.35rem, 5.2cqw, 3.4rem);
+    letter-spacing: -.03em;
+  }
 }
 
 .hero-meta-item.hero-record,
 .hero-meta-item.hero-dates {
   text-align: center;
   justify-content: center;
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: clamp(.9rem, 1.8vw, 1.08rem);
+  font-weight: 600;
   color: var(--text);
+}
+
+.hero-meta-item.hero-dates {
+  flex-direction: column;
+  gap: .2rem;
+}
+
+.hero-date-label {
+  font-weight: 600;
+}
+
+.hero-date-value {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+@supports (container-type: inline-size) {
+  .hero-meta-item.hero-record,
+  .hero-meta-item.hero-dates {
+    font-size: clamp(.9rem, 1.85cqw, 1.08rem);
+  }
 }
 
 #home .hero-sponsored,
@@ -2271,11 +2327,6 @@ sup {
       grid-template-columns: 1fr;
     }
 
-    .home-hero-title-row {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 0;
-    }
-
     .home-hero-details {
       width: 100%;
       padding: 0 .5rem;
@@ -2284,17 +2335,9 @@ sup {
 
     .home-hero-restyled .hero-title {
       max-width: 100%;
-      font-size: clamp(1.22rem, 3vw, 2.05rem);
       text-align: center;
     }
 
-    .home-hero-logo img {
-      max-width: 82px;
-      max-height: 72px;
-    }
-
-    .home-hero-logo-college,
-    .home-hero-logo-ieee,
     .welcome-logo {
       display: none;
     }
@@ -2354,24 +2397,6 @@ sup {
   }
 
   @media(max-width:520px) {
-    .home-hero-title-row {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .home-hero-logo-college {
-      grid-row: 1;
-    }
-
-    .home-hero-logo-ieee {
-      grid-row: 3;
-    }
-
-    .home-hero-logo img {
-      max-width: 105px;
-      max-height: 72px;
-    }
-
     .dates-grid,
     .speakers-grid,
     .members-grid,
