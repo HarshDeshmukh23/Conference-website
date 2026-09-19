@@ -1047,9 +1047,10 @@ function renderHome() {
         <div class="home-hero-title-row">
           <div class="home-hero-logo home-hero-logo-college"><img src="${ASSETS.collegeLogo}" alt="PRMITR College Logo" width="1024" height="1024"/></div>
           <h1 class="hero-title">
-            2027 International Conference<br>
-            on<br>
-            Automation and Resilient Innovative Expert System
+            <span style="white-space:nowrap">2027 International Conference</span><br>
+            <span style="white-space:nowrap">on</span><br>
+            <span style="white-space:nowrap">Automation and Resilient</span><br>
+            <span style="white-space:nowrap">Innovative Expert System</span>
           </h1>
           <div class="home-hero-logo home-hero-logo-ieee"><img src="${ASSETS.ieeeMain}" alt="IEEE" width="1280" height="209"/></div>
         </div>

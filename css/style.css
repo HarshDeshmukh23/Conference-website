@@ -440,7 +440,7 @@ sup {
   align-items: center;
   gap: .4rem;
   justify-content: center;
-  margin: .5rem 0;
+  margin: .5rem 0 1.25rem;
   text-align: center;
 }
 
@@ -543,7 +543,7 @@ sup {
 }
 
 .hero-title {
-  font-size: clamp(2.1rem, 5.4vw, 3rem);
+  font-size: clamp(1.22rem, 3vw, 2.05rem);
   font-weight: 900;
   line-height: 1.1;
   color: var(--text);
@@ -577,8 +577,8 @@ sup {
   font-weight: 600;
 }
 
-.hero-record,
-.hero-dates {
+.hero-meta-item.hero-record,
+.hero-meta-item.hero-dates {
   text-align: center;
   justify-content: center;
   font-size: 1rem;
@@ -2284,7 +2284,7 @@ sup {
 
     .home-hero-restyled .hero-title {
       max-width: 100%;
-      font-size: clamp(1.9rem, 4.8vw, 2.6rem);
+      font-size: clamp(1.22rem, 3vw, 2.05rem);
       text-align: center;
     }
 
