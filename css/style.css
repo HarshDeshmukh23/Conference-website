@@ -611,6 +611,12 @@ sup {
   }
 }
 
+@container hero-title-row (min-width: 980px) and (max-width: 1080px) {
+  .hero-title {
+    font-size: clamp(1.25rem, 3.3cqw, 3.15rem);
+  }
+}
+
 .hero-meta-item.hero-record,
 .hero-meta-item.hero-dates {
   text-align: center;
