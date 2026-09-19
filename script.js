@@ -899,12 +899,12 @@ const PROGRAM_TRACKS = [
 
 // ── CITY GALLERY ──────────────────────────────────────────
 const CITY_GALLERY = [
-    { src: ASSETS.ambadevi, alt: "Ambadevi Temple", desc: "A historic Hindu temple dedicated to Goddess Amba.", mapQuery: "Ambadevi Temple, Amravati, Maharashtra" },
-    { src: ASSETS.chikhaldara, alt: "Chikhaldara Hill Station", desc: "Scenic hill station renowned as the only hill station in the Vidarbha region.", mapQuery: "Chikhaldara Hill Station, Chikhaldara, Maharashtra" },
-    { src: ASSETS.melghat, alt: "Melghat Tiger Reserve", desc: "Among the first nine tiger reserves of India notified in 1973 under Project Tiger.", mapQuery: "Melghat Tiger Reserve, Amravati, Maharashtra" },
-    { src: ASSETS.upperwardha, alt: "Upper Wardha Dam", desc: "Known as Nal Damayanti Sagar, a major earthfill gravity dam on the Wardha River.", mapQuery: "Upper Wardha Dam, Amravati, Maharashtra" },
-    { src: ASSETS.shegao, alt: "Shri Gajanan Maharaj Mandir", desc: "A highly revered pilgrimage site and Samadhi shrine of saint Shri Gajanan Maharaj.", mapQuery: "Shri Gajanan Maharaj Mandir, Shegaon, Maharashtra" },
-    { src: ASSETS.semadoh, alt: "Semadoh Elephant Ride", desc: "Offers elephant safari rides to explore the dense Satpura forest and observe wildlife.", mapQuery: "Semadoh, Melghat, Maharashtra" },
+    { src: ASSETS.ambadevi, alt: "Ambadevi Temple", desc: "A historic Hindu temple dedicated to Goddess Amba.", mapQuery: "Ambadevi Temple, Amravati, Maharashtra", width: 600, height: 511 },
+    { src: ASSETS.chikhaldara, alt: "Chikhaldara Hill Station", desc: "Scenic hill station renowned as the only hill station in the Vidarbha region.", mapQuery: "Chikhaldara Hill Station, Chikhaldara, Maharashtra", width: 640, height: 640 },
+    { src: ASSETS.melghat, alt: "Melghat Tiger Reserve", desc: "Among the first nine tiger reserves of India notified in 1973 under Project Tiger.", mapQuery: "Melghat Tiger Reserve, Amravati, Maharashtra", width: 800, height: 530 },
+    { src: ASSETS.upperwardha, alt: "Upper Wardha Dam", desc: "Known as Nal Damayanti Sagar, a major earthfill gravity dam on the Wardha River.", mapQuery: "Upper Wardha Dam, Amravati, Maharashtra", width: 1557, height: 849 },
+    { src: ASSETS.shegao, alt: "Shri Gajanan Maharaj Mandir", desc: "A highly revered pilgrimage site and Samadhi shrine of saint Shri Gajanan Maharaj.", mapQuery: "Shri Gajanan Maharaj Mandir, Shegaon, Maharashtra", width: 736, height: 414 },
+    { src: ASSETS.semadoh, alt: "Semadoh Elephant Ride", desc: "Offers elephant safari rides to explore the dense Satpura forest and observe wildlife.", mapQuery: "Semadoh, Melghat, Maharashtra", width: 686, height: 386 },
 ];
 
 // CONTACTS and OPER_GROUPS are derived from loaded JSON data — see renderContact() and renderCommittee()
@@ -974,7 +974,7 @@ function renderNavbar() {
     <nav id="navbar">
       <div class="nav-inner">
         <div class="nav-brand" data-action="home-brand" role="button" tabindex="0">
-          <div class="nav-brand-logo"><img src="${ASSETS.icariesLogo}" alt="ICARIES 2027"/></div>
+          <div class="nav-brand-logo"><img src="${ASSETS.icariesLogo}" alt="ICARIES 2027" width="1148" height="918"/></div>
           <div>
             <span class="nav-brand-name">ICARIES 2027</span>
             <span class="nav-brand-sub">PRMITR Badnera</span>
@@ -1026,9 +1026,9 @@ function renderNavbar() {
 // ── PAGE: HOME ────────────────────────────────────────────
 function renderHome() {
     const galleryCards = CITY_GALLERY.map(g => `
-    <div class="city-card reveal" data-modal-src="${g.src}" data-modal-alt="${g.alt}">
+    <div class="city-card reveal" data-modal-src="${g.src}" data-modal-alt="${g.alt}" data-modal-width="${g.width}" data-modal-height="${g.height}">
       <div class="city-thumb">
-        <img src="${g.src}" alt="${g.alt}" loading="lazy"/>
+        <img src="${g.src}" alt="${g.alt}" width="${g.width}" height="${g.height}" loading="lazy" decoding="async"/>
         <div class="city-overlay"><span class="expand-icon">+</span></div>
       </div>
       <div class="city-info">
@@ -1045,20 +1045,20 @@ function renderHome() {
     <section id="home" class="section home-hero home-hero-restyled" style="padding-top:3.5rem;padding-bottom:3.5rem;text-align:center">
       <div class="hero-inner section-inner home-hero-layout">
         <div class="home-hero-title-row">
-          <div class="home-hero-logo home-hero-logo-college"><img src="${ASSETS.collegeLogo}" alt="PRMITR College Logo"/></div>
+          <div class="home-hero-logo home-hero-logo-college"><img src="${ASSETS.collegeLogo}" alt="PRMITR College Logo" width="1024" height="1024"/></div>
           <h1 class="hero-title">
             2027 International Conference<br>
             on<br>
             Automation and Resilient Innovative Expert System
           </h1>
-          <div class="home-hero-logo home-hero-logo-ieee"><img src="${ASSETS.ieeeMain}" alt="IEEE"/></div>
+          <div class="home-hero-logo home-hero-logo-ieee"><img src="${ASSETS.ieeeMain}" alt="IEEE" width="1280" height="209"/></div>
         </div>
         <div class="home-hero-details">
           <p class="hero-subtitle">Hybrid Mode</p>
           <div class="hero-meta-item hero-record">IEEE Conference Record Number: #72646</div>
           <div class="home-hero-sponsor-line">
             <span>Technically Sponsored by IEEE Maharashtra Section</span>
-            <img src="${ASSETS.ieeeMaha}" alt="IEEE Maharashtra Section"/>
+            <img src="${ASSETS.ieeeMaha}" alt="IEEE Maharashtra Section" width="144" height="37"/>
           </div>
           <div class="hero-meta-item hero-dates">${IC.cal} 26–27 February 2027</div>
           <p class="hero-sponsored hero-venue">Venue: Prof. Ram Meghe Institute of Technology and Research (PRMITR)<br>Badnera - Amravati 444701(MS)</p>
@@ -1086,7 +1086,7 @@ function renderHome() {
             </div>
           </div>
           <div class="welcome-logo">
-            <img src="${ASSETS.icariesLogo}" alt="ICARIES 2027"/>
+            <img src="${ASSETS.icariesLogo}" alt="ICARIES 2027" width="1148" height="918" loading="lazy" decoding="async"/>
           </div>
         </div>
       </div>
@@ -1107,7 +1107,7 @@ function renderHome() {
             </div>
           </div>
           <div class="about-img reveal">
-            <img src="${ASSETS.prmitr}" alt="PRMITR Campus"/>
+            <img src="${ASSETS.prmitr}" alt="PRMITR Campus" width="600" height="600" loading="lazy" decoding="async"/>
           </div>
         </div>
       </div>
@@ -1149,15 +1149,15 @@ function renderHome() {
 
             <div class="city-highlights">
               <div class="city-highlight-card reveal">
-                <img src="${ASSETS.shegao}" alt="Historical Legacy" class="highlight-img"/>
+                <img src="${ASSETS.shegao}" alt="Historical Legacy" class="highlight-img" width="736" height="414" loading="lazy" decoding="async"/>
                 <div class="highlight-info"><h4>Historical Legacy</h4><p>Rich in history, known as the 'Indrapuri' with monuments dating back centuries.</p></div>
               </div>
               <div class="city-highlight-card reveal">
-                <img src="${ASSETS.connectivity}" alt="Connectivity" class="highlight-img"/>
+                <img src="${ASSETS.connectivity}" alt="Connectivity" class="highlight-img" width="640" height="640" loading="lazy" decoding="async"/>
                 <div class="highlight-info"><h4>Connectivity</h4><p>Excellent rail (Badnera Junction) and road links, with Nagpur airport nearby.</p></div>
               </div>
               <div class="city-highlight-card reveal">
-                <img src="${ASSETS.chikhaldara}" alt="Pleasant Climate" class="highlight-img"/>
+                <img src="${ASSETS.chikhaldara}" alt="Pleasant Climate" class="highlight-img" width="640" height="640" loading="lazy" decoding="async"/>
                 <div class="highlight-info"><h4>Pleasant Climate</h4><p>June–July offers a wonderful monsoon chill and lush green landscapes.</p></div>
               </div>
             </div>
@@ -1433,7 +1433,7 @@ function renderVenue() {
         </div>
         <div class="hotel-grid">
           <article class="hotel-card">
-            <div class="hotel-card-img"><img src="${ASSETS.primePark}" alt="Prime Park Hotel, Amravati"/></div>
+            <div class="hotel-card-img"><img src="${ASSETS.primePark}" alt="Prime Park Hotel, Amravati" width="1024" height="683" loading="lazy" decoding="async"/></div>
             <div class="hotel-card-body">
               <h3 class="hotel-card-title">Prime Park</h3>
               <p class="hotel-card-desc">A premium stay option with spacious rooms, hearty breakfasts, and trusted hotel comforts.</p>
@@ -1441,7 +1441,7 @@ function renderVenue() {
             </div>
           </article>
           <article class="hotel-card">
-            <div class="hotel-card-img"><img src="${ASSETS.landmark}" alt="Landmark Continental Hotel, Amravati"/></div>
+            <div class="hotel-card-img"><img src="${ASSETS.landmark}" alt="Landmark Continental Hotel, Amravati" width="2880" height="1920" loading="lazy" decoding="async"/></div>
             <div class="hotel-card-body">
               <h3 class="hotel-card-title">Landmark Continental</h3>
               <p class="hotel-card-desc">Modern rooms and easy access to local dining with comfortable amenities and friendly service.</p>
@@ -1538,7 +1538,11 @@ function renderContact() {
     <article class="contact-card reveal${c.title === 'Email Us' ? ' contact-card-email' : ''}">
       <div class="contact-card-icon">${c.icon}</div>
       <h3 class="contact-card-title">${c.title}</h3>
-      ${c.details.map(detail => `<div class="contact-card-detail">${detail}</div>`).join('')}
+      ${c.details.map(detail => {
+        if (c.title === 'Email Us') return `<div class="contact-card-detail"><a href="mailto:${detail}">${detail}</a></div>`;
+        if (c.title === 'Call Us') return `<div class="contact-card-detail"><a href="tel:${detail.replace(/[^\d+]/g, '')}">${detail}</a></div>`;
+        return `<div class="contact-card-detail">${detail}</div>`;
+      }).join('')}
     </article>`).join('');
 
     return `
@@ -1565,7 +1569,7 @@ function renderFooter() {
         <div class="footer-grid">
           <div class="footer-brand-col">
             <div class="footer-logo-wrap">
-              <img src="${ASSETS.logo}" alt="ICARIES 2027" class="footer-logo-img"/>
+              <img src="${ASSETS.logo}" alt="ICARIES 2027" class="footer-logo-img" width="200" height="200" loading="lazy" decoding="async"/>
               <div>
                 <span class="footer-brand-name">ICARIES 2027</span>
                 <span class="footer-brand-tag">PRMITR, Badnera</span>
@@ -1593,9 +1597,9 @@ function renderFooter() {
           <div class="footer-col">
             <h4>Contact Us</h4>
             <div class="footer-c-item">${IC.loc}<span>Prof. Ram Meghe Institute of Technology and Research, Badnera-Amravati, MH, India</span></div>
-            <div class="footer-c-item">${IC.mail}<span>aries@mitra.ac.in</span></div>
-            <div class="footer-c-item">${IC.mail}<span>auchaudhari@mitra.ac.in</span></div>
-            <div class="footer-c-item">${IC.phone}<span>9021117416</span></div>
+            <div class="footer-c-item">${IC.mail}<a href="mailto:aries@mitra.ac.in">aries@mitra.ac.in</a></div>
+            <div class="footer-c-item">${IC.mail}<a href="mailto:auchaudhari@mitra.ac.in">auchaudhari@mitra.ac.in</a></div>
+            <div class="footer-c-item">${IC.phone}<a href="tel:9021117416">9021117416</a></div>
           </div>
         </div>
         <div class="footer-bottom">
@@ -1615,37 +1619,52 @@ function renderFooter() {
 }
 
 // ── MODAL ─────────────────────────────────────────────────
-function renderModal(src, alt) {
+let previousBodyOverflow = '';
+let isModalOpen = false;
+
+function renderModal(src, alt, width, height) {
     return `
     <div class="modal-overlay" id="img-modal">
       <div class="modal-content">
         <button class="modal-close" id="modal-close" aria-label="Close modal">×</button>
-        <img src="${src}" alt="${alt}"/>
+        <img src="${src}" alt="${alt}" width="${width}" height="${height}" loading="lazy" decoding="async"/>
         <div class="modal-caption">${alt}</div>
       </div>
     </div>`;
 }
 
-function openModal(src, alt) {
+function openModal(src, alt, width, height) {
     let modal = document.getElementById('img-modal');
     if (!modal) {
-        document.body.insertAdjacentHTML('beforeend', renderModal(src, alt));
+        document.body.insertAdjacentHTML('beforeend', renderModal(src, alt, width, height));
         modal = document.getElementById('img-modal');
+        modal.querySelector('#modal-close').addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
     } else {
         modal.querySelector('img').src = src;
         modal.querySelector('img').alt = alt;
+        modal.querySelector('img').width = width;
+        modal.querySelector('img').height = height;
         modal.querySelector('.modal-caption').textContent = alt;
-        modal.style.display = 'flex';
     }
-    document.getElementById('modal-close').addEventListener('click', closeModal);
-    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
     modal.style.display = 'flex';
+    if (!isModalOpen) previousBodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    isModalOpen = true;
 }
 
 function closeModal() {
     const modal = document.getElementById('img-modal');
     if (modal) modal.style.display = 'none';
+    document.body.style.overflow = previousBodyOverflow;
+    isModalOpen = false;
 }
+
+document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && document.getElementById('img-modal')?.style.display === 'flex') {
+        closeModal();
+    }
+});
 
 // ── SCROLL TOP BUTTON ─────────────────────────────────────
 function renderScrollTop() {
@@ -1696,7 +1715,7 @@ function renderMain() {
 function bindMainEvents() {
     // city gallery cards → modal
     document.querySelectorAll('[data-modal-src]').forEach(el => {
-        el.addEventListener('click', () => openModal(el.dataset.modalSrc, el.dataset.modalAlt));
+        el.addEventListener('click', () => openModal(el.dataset.modalSrc, el.dataset.modalAlt, Number(el.dataset.modalWidth), Number(el.dataset.modalHeight)));
     });
     // map buttons (stop propagation so card click doesn't fire)
     document.querySelectorAll('[data-map-query]').forEach(btn => {
