@@ -6,12 +6,11 @@ let DATA = {
             "A paper should not have more than Five authors.",
             "The author can submit a maximum of 03 papers. However, each paper needs to be registered separately.",
             "Page limit is of maximum 06 pages. You may submit a paper of up to 8 pages with an additional cost of ₹500 per extra page.",
-            "Student registrants must upload proof of their Institute ID during the online registration.",
-            "ICARIES members must upload a valid IEEE membership card during the online registration.",
+            "IEEE members must upload a valid IEEE membership card during the online registration.",
             "Tables, figures and images should have appropriate captions and be of good quality (dpi = 400). Each of these items must be cited inline in the main text of the manuscript.",
             "The full article must be submitted as a MS Word file in DOC or DOCX format with proper title.",
             "Before submitting your paper, please ensure that the English used is clear, concise and coherent. This is especially important if English is not your first language.",
-            "All submissions with less than 15% similarity will only be eligible for review, with the quality and scope of the work being taken into consideration.",
+            "All submissions with less than 15% similarity (Plagiarism) and the AI-generated text must be 0% or * will only be eligible for review, with the quality and scope of the work being taken into consideration.",
             "Once the full paper is accepted, the author(s) will be requested to submit the copyright transfer form.",
             "Any paper that does not follow the guidelines may not be considered for publication in the conference proceedings.",
             "All the accepted papers must be revised with due comments and suggestions given by reviewers before the deadlines.",
@@ -1047,19 +1046,27 @@ function renderHome() {
       <div class="hero-inner section-inner home-hero-layout">
         <div class="home-hero-title-row">
           <div class="home-hero-logo home-hero-logo-college"><img src="${ASSETS.collegeLogo}" alt="PRMITR College Logo"/></div>
-          <div class="home-hero-copy">
-            <h1 class="hero-title">
-              <span class="blue">ICARIES 2027</span>
-              IEEE International Conference on Automation<br>and Resilient Innovative Expert System<br>(Hybrid Mode)
-            </h1>
-            <p class="hero-sponsored">Venue: Prof. Ram Meghe Institute of Technology and Research (PRMITR)<br>Badnera - Amravati 444701(MS)</p>
-            <div class="home-hero-sponsor"><img src="${ASSETS.ieeeMaha}" alt="IEEE Maharashtra Section"/></div>
-          </div>
+          <h1 class="hero-title">
+            2027 International Conference<br>
+            on<br>
+            Automation and Resilient Innovative Expert System
+          </h1>
           <div class="home-hero-logo home-hero-logo-ieee"><img src="${ASSETS.ieeeMain}" alt="IEEE"/></div>
         </div>
-        <div class="hero-meta">
-          <div class="hero-meta-item">${IC.cal} 26–27 February 2027</div>
-          <div class="hero-meta-item">IEEE Conference Record Number: #72646</div>
+        <div class="home-hero-details">
+          <p class="hero-subtitle">Hybrid Mode</p>
+          <div class="hero-meta-item hero-record">IEEE Conference Record Number: #72646</div>
+          <div class="home-hero-sponsor-line">
+            <span>Technically Sponsored by IEEE Maharashtra Section</span>
+            <img src="${ASSETS.ieeeMaha}" alt="IEEE Maharashtra Section"/>
+          </div>
+          <div class="hero-meta-item hero-dates">${IC.cal} 26–27 February 2027</div>
+          <p class="hero-sponsored hero-venue">Venue: Prof. Ram Meghe Institute of Technology and Research (PRMITR)<br>Badnera - Amravati 444701(MS)</p>
+          <div class="hero-cta" style="margin-top:1.25rem">
+            <a href="${SUBMISSION_LINK}" target="_blank" rel="noopener noreferrer" class="btn btn-blue">
+              Submit Paper ${IC.arr}
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -1137,8 +1144,7 @@ function renderHome() {
             <h2 class="sec-title">About Amravati City</h2>
             <div class="sec-bar"></div>
             <div class="about-text">
-              <p>Amravati, often called the cultural capital of Vidarbha, is a significant city in Maharashtra. It is renowned for its historical temples, particularly the Ambadevi Temple, and serves as an educational hub with several universities and colleges.</p>
-              <p>The city holds a rich heritage and is a gateway to Melghat Tiger Reserve, offering both urban amenities and proximity to natural beauty. Amravati is strategically located and well-connected, making it an ideal venue for international intellectual gatherings.</p>
+              <p>Amravati, often called the cultural capital of Vidarbha, is a significant city in Maharashtra. It is renowned for its historical temples, particularly the Ambadevi Temple, and serves as an educational hub with several universities and colleges. The city holds a rich heritage and is a gateway to Melghat Tiger Reserve, offering both urban amenities and proximity to natural beauty. Amravati is strategically located and well-connected, making it an ideal venue for international intellectual gatherings.</p>
             </div>
 
             <div class="city-highlights">
@@ -1167,6 +1173,7 @@ function renderHome() {
 // ── PAGE: COMMITTEE ───────────────────────────────────────
 function renderCommittee() {
     const { organizing, technical, publication, advisory, plagiarism, operational } = DATA.committee;
+    const [lead, rest] = [organizing.slice(0, 2), organizing.slice(2)];
     // Derive unique ordered group labels directly from the data
     const operGroups = (() => {
         const seen = new Set();
@@ -1185,7 +1192,15 @@ function renderCommittee() {
           <h2 class="sec-title">Organizing Committee</h2>
           <div class="sec-bar"></div>
         </div>
-        <div class="members-grid">${membersGrid(organizing, true)}</div>
+        <div class="committee-lead">
+          ${lead.map(m => `
+          <div class="member-card member-card-lead">
+            <span class="member-role">${m.role}</span>
+            <div class="member-name">${m.name}</div>
+            ${m.org ? `<div class="member-org">${m.org}</div>` : ''}
+          </div>`).join('')}
+        </div>
+        <div class="members-grid">${membersGrid(rest, true)}</div>
       </div>
     </section>
 
@@ -1233,7 +1248,6 @@ function renderImportantDates() {
       <div class="section-inner" style="max-width:900px">
         <div class="dtable-title">Conference Schedule</div>
         <table class="dtable"><tbody>${datesRows}</tbody></table>
-        <p style="margin-top:1.25rem;color:var(--muted);font-size:.9rem">Late registration fee: ₹1,000 additional per participant.</p>
       </div>
     </section>`;
 }
@@ -1251,7 +1265,7 @@ function renderRegistration() {
         <span class="sec-eyebrow">ICARIES 2027</span>
         <h1 class="sec-title" style="font-size:clamp(1.6rem,4vw,2.8rem)">Registration</h1>
         <div class="sec-bar"></div>
-        <p>Registration information and applicable conference fees.</p>
+        <p style="color:rgba(255,255,255,.5);font-size:.9rem;margin-top:.3rem">Note : The conference is in Hybrid Mode (Online/Offline), however conference officials motivate the participants to take part in the conference in PHYSICAL MODE in order to utilize the fullest benefits of conference participation.</p>
       </div>
     </div>
     <section class="section registration-section">
@@ -1272,7 +1286,17 @@ function renderRegistration() {
               <thead><tr><th>Sr. No.</th><th>Category of Registration</th><th>Total Registration Fees</th></tr></thead>
               <tbody>${fees.map(([number, category, fee]) => `<tr><td>${number}</td><td>${category}</td><td>${fee}</td></tr>`).join('')}</tbody>
             </table>
+            <p style="margin-top:1.25rem;color:var(--muted);font-size:.9rem">Late registration fee: ₹1,000 additional per participant.</p>
           </div>
+        </div>
+        <div class="hero-cta" style="margin:1.5rem 0">
+          <a href="${SUBMISSION_LINK}" target="_blank" rel="noopener noreferrer" class="btn btn-blue">
+            Submit Paper ${IC.arr}
+          </a>
+        </div>
+        <div class="cmt-acknowledgment" style="margin-top:1.5rem;text-align:left">
+          <h2>CMT ACKNOWLEDGMENT</h2>
+          <p>The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.</p>
         </div>
       </div>
     </section>`;
@@ -1317,6 +1341,10 @@ function renderAuthorGuidelines() {
             <button class="btn btn-blue">Submit Paper ${IC.arr}</button>
             <button type="button" class="btn btn-outline-blue" onclick="window.open('https://www.ieee.org/conferences/publishing/templates','_blank','noopener,noreferrer')">Download Template</button>
           </div>
+        </div>
+        <div class="cmt-acknowledgment" style="margin-top:1.5rem;text-align:left">
+          <h2>CMT ACKNOWLEDGMENT</h2>
+          <p>The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.</p>
         </div>
       </div>
     </div>`;

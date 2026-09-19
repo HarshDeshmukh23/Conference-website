@@ -373,21 +373,25 @@ sup {
 
 .home-hero-title-row {
   display: grid;
-  grid-template-columns: 150px minmax(0, 1fr) 150px;
+  grid-template-columns: 172px minmax(0, 1fr) 172px;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2.25rem;
 }
 
 .home-hero-logo {
+  height: 170px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 0;
 }
 
 .home-hero-logo img {
   display: block;
-  max-width: 130px;
-  max-height: 105px;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
 }
 
@@ -401,30 +405,6 @@ sup {
   }
 }
 
-@media (min-width: 769px) {
-  .home-hero-logo {
-    height: 150px;
-  }
-
-  .home-hero-logo-college img {
-    width: 150px;
-    height: 150px;
-    max-width: 100%;
-    max-height: 100%;
-  }
-
-  .home-hero-logo-ieee img {
-    width: 150px;
-    height: 90px;
-    max-width: 100%;
-    max-height: 100%;
-  }
-
-  .home-hero-logo-ieee {
-    transform: translateX(-2rem);
-  }
-}
-
 @media (min-width: 769px) and (max-width: 900px) {
   .welcome-grid {
     grid-template-columns: 1fr;
@@ -435,7 +415,7 @@ sup {
     gap: 0;
   }
 
-  .home-hero-copy {
+  .home-hero-details {
     width: 100%;
     padding: 0 .5rem;
     text-align: center;
@@ -443,23 +423,28 @@ sup {
 
   .home-hero-logo-college,
   .home-hero-logo-ieee,
-  .home-hero-sponsor,
   .welcome-logo {
     display: none;
   }
 }
 
-.home-hero-copy {
-  min-width: 0;
+.home-hero-details {
+  width: 100%;
+  margin-top: 1.5rem;
+  text-align: center;
 }
 
-.home-hero-sponsor {
+.home-hero-sponsor-line {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .4rem;
   justify-content: center;
-  margin: -.35rem 0 1.25rem;
+  margin: .5rem 0;
+  text-align: center;
 }
 
-.home-hero-sponsor img {
+.home-hero-sponsor-line img {
   display: block;
   max-width: 185px;
   max-height: 46px;
@@ -480,9 +465,18 @@ sup {
 #home {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(180deg, #f5f8ff 0%, #eaf2ff 40%, #ffffff 100%);
+  background-image: url('../assets/prmitr.webp');
+  background-size: cover;
+  background-position: center;
   padding: 4rem 1.5rem 3.5rem;
   text-align: center;
+}
+
+#home::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, .65);
 }
 
 /* Reduce vertical gap between the home hero and the next section */
@@ -492,6 +486,11 @@ sup {
 
 .home-hero {
   position: relative;
+}
+
+#home .hero-inner {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-inner {
@@ -560,6 +559,31 @@ sup {
   font-size: 1.15rem;
   color: var(--text-soft);
   margin: .8rem 0 1.4rem;
+}
+
+.hero-subtitle {
+  display: inline-block;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--blue-dark);
+  background: var(--blue-light);
+  padding: .35rem 1rem;
+  border-radius: 999px;
+  margin-bottom: .75rem;
+}
+
+.hero-venue {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.hero-record,
+.hero-dates {
+  text-align: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text);
 }
 
 #home .hero-sponsored,
@@ -1760,6 +1784,22 @@ sup {
     min-width: 0;
   }
 
+  .committee-lead {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .member-card-lead {
+    width: min(100%, calc((100% - 3rem) / 4));
+    text-align: center;
+    padding: 1.25rem;
+  }
+
   .member-card {
     background: #fff;
     border: 1.5px solid var(--border);
@@ -2236,7 +2276,7 @@ sup {
       gap: 0;
     }
 
-    .home-hero-copy {
+    .home-hero-details {
       width: 100%;
       padding: 0 .5rem;
       text-align: center;
@@ -2255,7 +2295,6 @@ sup {
 
     .home-hero-logo-college,
     .home-hero-logo-ieee,
-    .home-hero-sponsor,
     .welcome-logo {
       display: none;
     }
@@ -2322,10 +2361,6 @@ sup {
 
     .home-hero-logo-college {
       grid-row: 1;
-    }
-
-    .home-hero-copy {
-      grid-row: 2;
     }
 
     .home-hero-logo-ieee {
